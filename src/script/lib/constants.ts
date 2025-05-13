@@ -41,6 +41,12 @@ export enum BitmojiPresence {
   MOBILE = 'MOBILE',
 }
 
+export enum PeekingNotification {
+  DEFAULT = 'DEFAULT',
+  OFF = 'OFF',
+  STAY = 'STAY',
+}
+
 export enum ChatHandling {
   DEFAULT = 'DEFAULT',
   AUTO_SAVE = 'AUTO_SAVE',
@@ -65,9 +71,9 @@ export const defaultSettingValues = {
   [SettingIds.UNLIMITED_FILE_SIZE]: false,
   [SettingIds.ALLOW_CROSS_TAB]: true,
   [SettingIds.PREVENT_STORY_READ_RECEIPTS]: false,
-  [SettingIds.HALF_SWIPE_NOTIFICATION]: false,
+  [SettingIds.HALF_SWIPE_NOTIFICATION]: PeekingNotification.OFF,
   [SettingIds.OPEN_CHAT_NOTIFICATION]: false,
-  [SettingIds.BITMOJI_PRESENCE]: BitmojiPresence.DEFAULT,
+  [SettingIds.BITMOJI_PRESENCE]: BitmojiPresence.DEFAULT, 
   [SettingIds.CHAT_HANDLING]: ChatHandling.DEFAULT,
   [SettingIds.PRESENCE_LOGGING]: false,
 };
