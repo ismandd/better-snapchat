@@ -4,9 +4,10 @@ import {
   getAllConversations,
   getSnapchatPublicUser,
   getFriends,
+  getMultipleSnapchatPublicUsers,
   getSnapchatStore,
 } from '../../utils/snapchat';
-import { logError } from '../../lib/debug';
+import { logInfo, logError } from '../../lib/debug';
 
 function initializeUserInfo() {
   try {
@@ -43,11 +44,7 @@ async function setTagsInputData() {
           const rawTitle = chat.conversation.title;
           const title = typeof rawTitle === 'string' ? rawTitle : (rawTitle as any)?.title || String(rawTitle);
           
-          /**
-           * BUG PREVENTION: Use both Group Name and a slice of the Unique ID.
-           * This guarantees that even duplicate names like "AISM" become unique:
-           * "AISM (a1b2)" vs "AISM (c3d4)"
-           */
+          // Uses both group name and some of the conversationId which fixes the duplicate error
           const uniqueIdSuffix = conversationId.substring(0, 4);
           acc[conversationId] = `${title} (${uniqueIdSuffix})`;
         }
