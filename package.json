@@ -12,14 +12,16 @@
     "build:firefox": "rm -rf ./public/build/ && node ./scripts/firefox.js",
     "build:userscript": "rm -rf ./public/build/ && node ./scripts/userscript.js",
     "package": "npm run package:chrome",
-    "package:chrome": "rm -rf ./public/build/ && npm run build:chrome && cross-zip ./public better-snapchat-chrome-v%npm_package_version%.zip",
-    "package:firefox": "rm -rf ./public/build/ && npm run build:firefox && cross-zip ./public better-snapchat-firefox-v%npm_package_version%.zip"
+    "package:chrome": "rm -rf ./public/build/ && npm run build:chrome && cross-zip ./public ./dist/better-snapchat-chrome-v%npm_package_version%.zip",
+    "package:firefox": "rm -rf ./public/build/ && npm run build:firefox && cross-zip ./public ./dist/better-snapchat-firefox-v%npm_package_version%.zip",
+    "package:userscript": "rm -rf ./public/build/ && npm run build:userscript && cp ./public/build/userscript.js ./dist/better-snapchat-userscript-v%npm_package_version%.js",
+    "package:all": "npm run package:chrome && npm run package:firefox && npm run package:userscript"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/daintydust/better-snapchat.git"
   },
-  "author": "donnieacolston@gmail.com",
+  "author": "donnieacolston@gmail.com, dev@daintydust.dev",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/daintydust/better-snapchat/issues"
