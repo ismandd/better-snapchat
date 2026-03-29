@@ -1,13 +1,7 @@
 import settings from '../../lib/settings';
 import Module from '../../lib/module';
-import {
-  getAllConversations,
-  getSnapchatPublicUser,
-  getFriends,
-  getMultipleSnapchatPublicUsers,
-  getSnapchatStore,
-} from '../../utils/snapchat';
-import { logInfo, logError } from '../../lib/debug';
+import { getAllConversations, getSnapchatPublicUser, getFriends, getSnapchatStore } from '../../utils/snapchat';
+import { logError } from '../../lib/debug';
 
 function initializeUserInfo() {
   try {
@@ -26,13 +20,8 @@ function initializeUserInfo() {
     const userId = state.auth.userId;
     const userInfo = state.auth.me;
 
-    if (userId) {
-      settings.setSetting('USER_ID', userId);
-    }
-
-    if (userInfo) {
-      settings.setSetting('USER_INFO', userInfo);
-    }
+    if (userId) settings.setSetting('USER_ID', userId);
+    if (userInfo) settings.setSetting('USER_INFO', userInfo);
   } catch (error) {
     logError('UserInfo: Error initializing, retrying...', error);
     setTimeout(() => initializeUserInfo(), 1000);
@@ -60,6 +49,8 @@ async function setTagsInputData() {
     if (userId === selfUserId) continue;
 
     const user = await getSnapchatPublicUser(userId);
+    if (!user) continue;
+
     const username = (user.mutable_username || user.username).toLowerCase();
 
     if (excludedUsernames.includes(username)) continue;

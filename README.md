@@ -48,6 +48,9 @@ You can install **BetterSnap** via the [User-Script](https://better-snapchat.vas
 4. The compiled extension will be available in the `/public` directory.
 5. Alternatively, you can run `npm run package` to package the extension.
 
+> ⚠️ **Firefox Support** – Firefox is no longer officially supported. It sometimes works and sometimes doesn't. Use at your own risk.
+>
+
 ## How to Contribute
 
 1. Clone or fork the respository `git@github.com:daintydust/better-snapchat.git`.

@@ -71,7 +71,7 @@ async function buildExtension() {
       ],
       define: {
         'process.env.VERSION': JSON.stringify(package.version),
-        'process.env.HMR_PORT': process.env.HMR_PORT,
+        'process.env.HMR_PORT': JSON.stringify(process.env.HMR_PORT) || '8080',
       },
     }),
     fs.writeFile('./public/manifest.json', JSON.stringify(manifest, null, 2)),
@@ -88,12 +88,16 @@ const PING_INTERVAL = 60e3;
   chokidar.watch('./src/script').on('change', async (filePath) => {
     console.log('File changed:', filePath);
     console.log('Esbuild: Rebuilding...');
-    await buildExtension();
+    try {
+      await buildExtension();
 
-    if (websocket.clients.size > 0) {
-      const RELOAD_PAYLOAD = JSON.stringify({ type: 'reload', filePath });
-      websocket.clients.forEach((client) => client.send(RELOAD_PAYLOAD));
-      console.log('Reloaded all clients');
+      if (websocket.clients.size > 0) {
+        const RELOAD_PAYLOAD = JSON.stringify({ type: 'reload', filePath });
+        websocket.clients.forEach((client) => client.send(RELOAD_PAYLOAD));
+        console.log('Reloaded all clients');
+      }
+    } catch (e) {
+      console.error('Esbuild: Build failed:', e);
     }
   });
 

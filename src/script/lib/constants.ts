@@ -44,6 +44,7 @@ export const SettingIds = {
   PRESENCE_LOGGING_TYPES: 'PRESENCE_LOGGING_TYPES',
   PRESENCE_LOGGING_SHOW_TIMESTAMP: 'PRESENCE_LOGGING_SHOW_TIMESTAMP',
   PRESENCE_INDICATOR: 'PRESENCE_INDICATOR',
+  SNAP_PEEKING: 'SNAP_PEEKING',
 } as const;
 
 export enum BitmojiPresence {
@@ -88,6 +89,7 @@ export const defaultSettingValues = {
   [SettingIds.ALLOW_CROSS_TAB]: true,
   [SettingIds.PREVENT_STORY_READ_RECEIPTS]: false,
   [SettingIds.HALF_SWIPE_NOTIFICATION]: false,
+  [SettingIds.SNAP_PEEKING]: false,
   [SettingIds.OPEN_CHAT_NOTIFICATION]: false,
   [SettingIds.BITMOJI_PRESENCE]: BitmojiPresence.DEFAULT,
   [SettingIds.CHAT_HANDLING]: ChatHandling.DEFAULT,
