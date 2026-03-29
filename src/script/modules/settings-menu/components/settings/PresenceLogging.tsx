@@ -36,12 +36,7 @@ function PresenceLogging() {
 
   return (
     <Stack gap="xs">
-      <Switch
-        label={NAME}
-        description={DESCRIPTION}
-        checked={enabled}
-        onChange={() => setEnabled(!enabled)}
-      />
+      <Switch label={NAME} description={DESCRIPTION} checked={enabled} onChange={() => setEnabled(!enabled)} />
       {enabled && (
         <Paper withBorder p="md" radius="md">
           <Stack gap="xs">

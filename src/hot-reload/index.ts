@@ -7,7 +7,7 @@ const PORT = process.env.HMR_PORT ?? 9292;
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === 'SEND_NTFY_NOTIFICATION') {
     const { topic, title, body, iconUrl, clickUrl, priority } = request.data;
-    
+
     // Encode header values to handle special characters
     const encodeHeaderValue = (value: string) => {
       // Use base64 encoding for non-ASCII characters
@@ -16,37 +16,37 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       }
       return value;
     };
-    
+
     const headers: Record<string, string> = {
-      'Priority': priority?.toString() || '3',
+      Priority: priority?.toString() || '3',
     };
-    
+
     if (title) {
       headers['Title'] = encodeHeaderValue(title);
     }
-    
+
     if (iconUrl) {
       headers['Icon'] = iconUrl;
     }
-    
+
     if (clickUrl) {
       headers['Click'] = clickUrl;
     }
-    
+
     fetch(`https://ntfy.sh/${topic}`, {
       method: 'POST',
       body: body,
       headers: headers,
     })
-    .then(response => {
-      console.log('ntfy notification sent successfully');
-      sendResponse({ success: true, status: response.status });
-    })
-    .catch(error => {
-      console.error('Failed to send ntfy notification:', error);
-      sendResponse({ success: false, error: error.message });
-    });
-    
+      .then((response) => {
+        console.log('ntfy notification sent successfully');
+        sendResponse({ success: true, status: response.status });
+      })
+      .catch((error) => {
+        console.error('Failed to send ntfy notification:', error);
+        sendResponse({ success: false, error: error.message });
+      });
+
     return true;
   }
 });

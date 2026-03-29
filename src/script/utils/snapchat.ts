@@ -178,22 +178,21 @@ export function getAllChats() {
   }
 
   const allChats: Record<string, any> = {};
-  
+
   if (conversations != null) {
     for (const [conversationId, conversation] of Object.entries(conversations)) {
       allChats[conversationId] = conversation;
     }
   }
-  
+
   if (feeds != null) {
     for (const [conversationId, conversation] of Object.entries(feeds)) {
       allChats[conversationId] = conversation;
     }
   }
-  
+
   return allChats;
 }
-
 
 export function getFriends() {
   const { mutuallyConfirmedFriendIds } = getSnapchatStore().getState().user;
